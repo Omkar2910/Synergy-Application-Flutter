@@ -1,6 +1,6 @@
 {
-    "name": "synergy_seller_app",
-    "short_name": "synergy_seller_app",
+    "name": "seller_app",
+    "short_name": "seller_app",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

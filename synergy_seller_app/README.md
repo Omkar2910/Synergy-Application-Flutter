@@ -1,4 +1,4 @@
-# synergy_seller_app
+# seller_app
 
 A new Flutter project.
 

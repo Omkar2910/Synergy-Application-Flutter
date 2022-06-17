@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.synergy_seller_app">
+    package="com.example.seller_app">
    <application
-        android:label="synergy_seller_app"
+        android:label="seller_app"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
