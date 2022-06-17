@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\offic\\OneDrive\\Desktop\\Projet_mca\\seller_app\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
+            "outputFile": "C:\\Users\\offic\\OneDrive\\Desktop\\delete\\Synergy-Application-Flutter\\synergy_seller_app\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
             "map": [
                 {
                     "source": "C:\\Users\\offic\\.gradle\\caches\\transforms-3\\49bc944d29f70d45aa5add8e43e3247e\\transformed\\jetified-window-1.0.0-beta04\\res\\values\\values.xml",
@@ -23,7 +23,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\offic\\OneDrive\\Desktop\\Projet_mca\\seller_app\\android\\app\\src\\main\\res\\values\\styles.xml",
+                    "source": "C:\\Users\\offic\\OneDrive\\Desktop\\delete\\Synergy-Application-Flutter\\synergy_seller_app\\android\\app\\src\\main\\res\\values\\styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",
