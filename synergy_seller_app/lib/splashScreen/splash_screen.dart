@@ -12,7 +12,7 @@ class MysplashScreen extends StatefulWidget {
 
 class _MysplashScreenState extends State<MysplashScreen> {
   startTimer() {
-    Timer(const Duration(seconds: 8), () async {
+    Timer(const Duration(seconds: 1), () async {
       Navigator.pushReplacement(
           //.pushReplacement instead of .push
           context,
