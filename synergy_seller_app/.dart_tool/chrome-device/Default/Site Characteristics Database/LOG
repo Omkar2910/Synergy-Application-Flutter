@@ -1,4 +1,13 @@
-2022/06/17-20:17:20.253 6c Reusing MANIFEST C:\Users\Omkar\AppData\Local\Temp\flutter_tools.4c4c4739\flutter_tools_chrome_device.20c02aea\Default\Site Characteristics Database/MANIFEST-000001
-2022/06/17-20:17:20.257 6c Recovering log #6
-2022/06/17-20:17:20.257 6c Reusing old log C:\Users\Omkar\AppData\Local\Temp\flutter_tools.4c4c4739\flutter_tools_chrome_device.20c02aea\Default\Site Characteristics Database/000006.log 
-2022/06/17-20:17:20.258 6c Delete type=0 #3
+2022/06/18-16:26:41.917 52dc Reusing MANIFEST C:\Users\offic\AppData\Local\Temp\flutter_tools.6b6cf8ca\flutter_tools_chrome_device.e3a49e9a\Default\Site Characteristics Database/MANIFEST-000001
+2022/06/18-16:26:41.919 52dc Recovering log #3
+2022/06/18-16:26:41.919 52dc Level-0 table #13: started
+2022/06/18-16:26:41.924 52dc Level-0 table #13: 194 bytes OK
+2022/06/18-16:26:41.924 52dc Recovering log #6
+2022/06/18-16:26:41.924 52dc Level-0 table #14: started
+2022/06/18-16:26:41.929 52dc Level-0 table #14: 180 bytes OK
+2022/06/18-16:26:41.931 52dc Recovering log #10
+2022/06/18-16:26:41.932 52dc Reusing old log C:\Users\offic\AppData\Local\Temp\flutter_tools.6b6cf8ca\flutter_tools_chrome_device.e3a49e9a\Default\Site Characteristics Database/000010.log 
+2022/06/18-16:26:41.934 52dc Delete type=0 #3
+2022/06/18-16:26:41.934 52dc Delete type=2 #4
+2022/06/18-16:26:41.934 52dc Delete type=2 #6
+2022/06/18-16:26:41.934 52dc Delete type=0 #6

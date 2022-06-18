@@ -6,6 +6,7 @@ import 'package:seller_app/widgets/custom_text_field.dart';
 
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:seller_app/widgets/error_dialog.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -58,6 +59,55 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
     locationController.text = completeAddress;
   }
+
+  Future<void> formValidation() async
+  {
+      if(imageXFile==null)
+      {
+        showDialog(
+          context: context ,
+          builder: (c){
+            return ErrorDialog(
+              message: "Please select an image",
+            );
+          }
+        );
+      }
+      else
+      {
+        if(passwordController.text == confirmPasswordController.text)
+        {
+          if(confirmPasswordController.text.isNotEmpty && emailController.text.isNotEmpty && phoneController.text.isNotEmpty && locationController.text.isNotEmpty)
+          {
+            
+          }
+          else
+          {
+            showDialog(
+          context: context ,
+          builder: (c){
+            return ErrorDialog(
+              message: "Please enter all the required details for Registration.",
+            );
+          }
+        );
+          }
+        }
+        else
+        {
+          showDialog(
+          context: context ,
+          builder: (c){
+            return ErrorDialog(
+              message: "Password and ConfirmPassword does not match.",
+            );
+          }
+        );
+        }
+      }
+
+
+  } 
 
   @override
   Widget build(BuildContext context) {
@@ -167,7 +217,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
               ),
-              onPressed: () => print("clicked"),
+              onPressed: ()
+              {
+                formValidation();
+              },
               child: const Text("Sign Up",
                   style: TextStyle(
                       color: Colors.white, fontWeight: FontWeight.bold)),

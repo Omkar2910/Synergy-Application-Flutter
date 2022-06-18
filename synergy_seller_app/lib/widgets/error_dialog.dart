@@ -13,7 +13,7 @@ class ErrorDialog extends StatelessWidget {
       actions: [
         ElevatedButton(
             style: ElevatedButton.styleFrom(
-              primary: Colors.red,
+              primary: Color.fromARGB(255, 50, 97, 218),
             ),
             onPressed: () {
               Navigator.pop(context);
