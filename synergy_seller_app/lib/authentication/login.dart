@@ -22,7 +22,7 @@ class _LoginScreenState extends State<LoginScreen> {
           Container(
             alignment: Alignment.bottomCenter,
             child: Padding(
-              padding: EdgeInsets.all(15),
+              padding: const EdgeInsets.all(15),
               child: Image.asset(
                 "images/seller.png",
                 height: 270,
@@ -46,14 +46,17 @@ class _LoginScreenState extends State<LoginScreen> {
                   isObsecre: true,
                 ),
                 ElevatedButton(
-                  child: const Text("Login",
-                      style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold)),
                   style: ElevatedButton.styleFrom(
                     primary: Colors.cyan,
-                    padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 50, vertical: 10),
                   ),
                   onPressed: () => print("clicked"),
+                  child: const Text(
+                    "Login",
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold),
+                  ),
                 ),
                 const SizedBox(
                   height: 30,

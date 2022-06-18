@@ -23,6 +23,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
   XFile? imageXFile;
   final ImagePicker _picker = ImagePicker();
 
+  Future<void> _getimage() async {
+    imageXFile = await _picker.pickImage(source: ImageSource.gallery);
+
+    setState(() {
+      imageXFile;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -34,6 +42,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
               height: 10,
             ),
             InkWell(
+              onTap: () {
+                _getimage(); //calling this function to pick image from gallary
+              },
               child: CircleAvatar(
                 radius: MediaQuery.of(context).size.width * 0.20,
                 backgroundColor: Colors.white,
@@ -121,14 +132,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
               height: 30,
             ),
             ElevatedButton(
-              child: const Text("Sign Up",
-                  style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.bold)),
               style: ElevatedButton.styleFrom(
                 primary: Colors.cyan,
                 padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
               ),
               onPressed: () => print("clicked"),
+              child: const Text("Sign Up",
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold)),
             ),
             const SizedBox(
               height: 30,
