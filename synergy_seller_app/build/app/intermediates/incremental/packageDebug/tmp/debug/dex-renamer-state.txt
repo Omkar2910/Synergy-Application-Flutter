@@ -1,4 +1,4 @@
-#Sat Jun 18 09:11:53 IST 2022
+#Sat Jun 18 09:50:05 IST 2022
 base.0=D\:\\PROJECT_MCA\\Synergy-Application-Flutter\\synergy_seller_app\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
 renamed.0=classes.dex
 path.0=classes.dex

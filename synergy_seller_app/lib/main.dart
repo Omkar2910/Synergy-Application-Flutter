@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:seller_app/splashScreen/splashScreen.dart';
+import 'package:seller_app/splashScreen/splash_screen.dart';
 
-Future <void> main() async
-{
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
@@ -16,11 +15,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Sellers App',
       theme: ThemeData(
-       
         primarySwatch: Colors.blue,
       ),
       home: const MysplashScreen(),
     );
   }
 }
-

@@ -11,22 +11,20 @@ class MysplashScreen extends StatefulWidget {
 }
 
 class _MysplashScreenState extends State<MysplashScreen> {
+  startTimer() {
+    Timer(const Duration(seconds: 8), () async {
+      Navigator.pushReplacement(
+          //.pushReplacement instead of .push
+          context,
+          MaterialPageRoute(builder: (c) => const AuthScreen()));
+    });
+  }
 
-
-startTimer()
-{
-  Timer(const Duration(seconds: 8), () async{
-    Navigator.push(context, MaterialPageRoute(builder: (c)=> const AuthScreen()));
-  } );
-  
-}
-
-@override
-void initState()
-{
-  super.initState();
-  startTimer();
-}
+  @override
+  void initState() {
+    super.initState();
+    startTimer();
+  }
 
   @override
   Widget build(BuildContext context) {
