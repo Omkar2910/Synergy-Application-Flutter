@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\PROJECT_MCA\\Synergy-Application-Flutter\\synergy_seller_app\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-cs\\values-cs.xml",
+            "outputFile": "C:\\Users\\offic\\OneDrive\\Desktop\\flutter_projet\\Synergy-Application-Flutter\\synergy_seller_app\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-cs\\values-cs.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Omkar\\.gradle\\caches\\transforms-3\\1ea967b797818d9badf6aaa0240ca184\\transformed\\jetified-play-services-base-17.0.0\\res\\values-cs\\values.xml",
+                    "source": "C:\\Users\\offic\\.gradle\\caches\\transforms-3\\1ea967b797818d9badf6aaa0240ca184\\transformed\\jetified-play-services-base-17.0.0\\res\\values-cs\\values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
@@ -21,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Omkar\\.gradle\\caches\\transforms-3\\4ef803ba34d31dcf48df123a27eb5d76\\transformed\\jetified-play-services-basement-17.0.0\\res\\values-cs\\values.xml",
+                    "source": "C:\\Users\\offic\\.gradle\\caches\\transforms-3\\4ef803ba34d31dcf48df123a27eb5d76\\transformed\\jetified-play-services-basement-17.0.0\\res\\values-cs\\values.xml",
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",
@@ -38,7 +38,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Omkar\\.gradle\\caches\\transforms-3\\d363e3b5616f580c766e3e2b3c05f27d\\transformed\\core-1.8.0\\res\\values-cs\\values-cs.xml",
+                    "source": "C:\\Users\\offic\\.gradle\\caches\\transforms-3\\d363e3b5616f580c766e3e2b3c05f27d\\transformed\\core-1.8.0\\res\\values-cs\\values-cs.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
