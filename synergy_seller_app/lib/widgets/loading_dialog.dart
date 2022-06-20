@@ -12,10 +12,12 @@ class LoadingDialog extends StatelessWidget {
       key: key,
       content: Column(
         mainAxisSize: MainAxisSize.min,
-        children: [  
+        children: [
           circularProgress(),
-          SizedBox(height: 10),
-          Text(message! + ", Please Wait..."),
+          const SizedBox(
+            height: 10,
+          ),
+          Text(message! + ", Please wait..."),
         ],
       ),
     );

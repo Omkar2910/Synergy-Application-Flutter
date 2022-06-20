@@ -3,24 +3,22 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:seller_app/global/global.dart';
 import 'package:seller_app/mainScreens/home_screen.dart';
 import 'package:seller_app/widgets/custom_text_field.dart';
-
-import 'package:geocoding/geocoding.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:seller_app/widgets/error_dialog.dart';
 import 'package:seller_app/widgets/loading_dialog.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as fStorage;
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../global/global.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
 
   @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
+  _RegisterScreenState createState() => _RegisterScreenState();
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
@@ -41,9 +39,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   String sellerImageUrl = "";
   String completeAddress = "";
 
-  Future<void> _getimage() async {
+  Future<void> _getImage() async {
     imageXFile = await _picker.pickImage(source: ImageSource.gallery);
-
     setState(() {
       imageXFile;
     });
@@ -58,6 +55,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
 
     position = newPosition;
+
     placeMarks = await placemarkFromCoordinates(
       position!.latitude,
       position!.longitude,
@@ -77,22 +75,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
           context: context,
           builder: (c) {
             return ErrorDialog(
-              message: "Please select an image",
+              message: "Please select an image.",
             );
           });
     } else {
       if (passwordController.text == confirmPasswordController.text) {
         if (confirmPasswordController.text.isNotEmpty &&
             emailController.text.isNotEmpty &&
+            nameController.text.isNotEmpty &&
             phoneController.text.isNotEmpty &&
             locationController.text.isNotEmpty) {
-          // Start Uploading
+          //start uploading image
           showDialog(
               context: context,
               builder: (c) {
                 return LoadingDialog(
-                  message:
-                      "Registering Account", // Custom Widget loading_dialog.dart
+                  message: "Registering Account",
                 );
               });
 
@@ -117,7 +115,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               builder: (c) {
                 return ErrorDialog(
                   message:
-                      "Please enter all the required details for Registration.",
+                      "Please write the complete required info for Registration.",
                 );
               });
         }
@@ -126,7 +124,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             context: context,
             builder: (c) {
               return ErrorDialog(
-                message: "Password and ConfirmPassword does not match.",
+                message: "Password do not match.",
               );
             });
       }
@@ -157,15 +155,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
     if (currentUser != null) {
       saveDataToFirestore(currentUser!).then((value) {
         Navigator.pop(context);
-        // send user to the home screen
-        Route newRoute = MaterialPageRoute(builder: (c) => HomeScreen());
+        //send user to homePage
+        Route newRoute = MaterialPageRoute(builder: (c) => const HomeScreen());
         Navigator.pushReplacement(context, newRoute);
       });
     }
   }
 
   Future saveDataToFirestore(User currentUser) async {
-    FirebaseFirestore.instance.collection("seller").doc(currentUser.uid).set({
+    FirebaseFirestore.instance.collection("sellers").doc(currentUser.uid).set({
       "sellerUID": currentUser.uid,
       "sellerEmail": currentUser.email,
       "sellerName": nameController.text.trim(),
@@ -179,7 +177,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
     });
 
     //save data locally
-
     sharedPreferences = await SharedPreferences.getInstance();
     await sharedPreferences!.setString("uid", currentUser.uid);
     await sharedPreferences!.setString("email", currentUser.email.toString());
@@ -199,7 +196,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ),
             InkWell(
               onTap: () {
-                _getimage(); //calling this function to pick image from gallary
+                _getImage();
               },
               child: CircleAvatar(
                 radius: MediaQuery.of(context).size.width * 0.20,
@@ -258,7 +255,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     controller: locationController,
                     hintText: "Cafe/Restaurant Address",
                     isObsecre: false,
-                    enabled: false,
+                    enabled: true,
                   ),
                   Container(
                     width: 400,
@@ -277,12 +274,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         getCurrentLocation();
                       },
                       style: ElevatedButton.styleFrom(
-                          primary: Colors.amber,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30),
-                          )),
+                        primary: Colors.amber,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                      ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
@@ -298,9 +296,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
               onPressed: () {
                 formValidation();
               },
-              child: const Text("Sign Up",
-                  style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.bold)),
+              child: const Text(
+                "Sign Up",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
             const SizedBox(
               height: 30,
