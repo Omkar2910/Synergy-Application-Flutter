@@ -5,7 +5,6 @@ import 'package:synergy_user_app/authentication/auth_screen.dart';
 import 'package:synergy_user_app/global/global.dart';
 import 'package:synergy_user_app/mainScreens/home_screen.dart';
 
-
 class MysplashScreen extends StatefulWidget {
   const MysplashScreen({Key? key}) : super(key: key);
 
@@ -15,7 +14,7 @@ class MysplashScreen extends StatefulWidget {
 
 class _MysplashScreenState extends State<MysplashScreen> {
   startTimer() async {
-    Timer(const Duration(seconds: 1), () async {
+    Timer(const Duration(seconds: 2), () async {
       //if seller is already logged in already
       if (firebaseAuth.currentUser != null) {
         Navigator.pushReplacement(
@@ -50,13 +49,13 @@ class _MysplashScreenState extends State<MysplashScreen> {
             ],
             begin: FractionalOffset(0.0, 0.0),
             end: FractionalOffset(1.0, 0.0),
-            stops: [0.0,1.0],
+            stops: [0.0, 1.0],
             tileMode: TileMode.clamp,
           ),
         ),
         child: Center(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset("images/welcome.png"),
             const SizedBox(
@@ -64,7 +63,6 @@ class _MysplashScreenState extends State<MysplashScreen> {
             ),
             const Padding(
               padding: EdgeInsets.all(18.0),
-              
               child: Text(
                 "Order Food Online",
                 textAlign: TextAlign.center,

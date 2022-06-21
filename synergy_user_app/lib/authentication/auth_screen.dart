@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:synergy_user_app/authentication/login.dart';
 import 'package:synergy_user_app/authentication/register.dart';
 
-
 class AuthScreen extends StatefulWidget {
   const AuthScreen({Key? key}) : super(key: key);
 
@@ -33,7 +32,7 @@ class _AuthScreenState extends State<AuthScreen> {
             title: const Text(
               "Synergy",
               style: TextStyle(
-                fontSize: 60,
+                fontSize: 40,
                 fontFamily: "Sinatra",
                 color: Colors.white,
               ),
@@ -60,22 +59,20 @@ class _AuthScreenState extends State<AuthScreen> {
               indicatorWeight: 5,
             ),
           ),
-          body: Container(  
-            decoration: const BoxDecoration(  
-              gradient: LinearGradient(  
-                begin: Alignment.topRight,
-                end:  Alignment.bottomLeft,
-                colors: [
+          body: Container(
+            decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                    begin: Alignment.topRight,
+                    end: Alignment.bottomLeft,
+                    colors: [
                   Colors.amber,
                   Colors.cyan,
-                ]
-              )
-            ),
-            child: const TabBarView(  
-             children: [
-              LoginScreen(),
-              RegisterScreen(),
-             ],
+                ])),
+            child: const TabBarView(
+              children: [
+                LoginScreen(),
+                RegisterScreen(),
+              ],
             ),
           ),
         ));

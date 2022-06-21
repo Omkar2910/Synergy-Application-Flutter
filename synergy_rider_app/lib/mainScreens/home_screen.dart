@@ -17,18 +17,17 @@ class _HomeScreenState extends State<HomeScreen> {
         flexibleSpace: Container(
           decoration: const BoxDecoration(
               gradient: LinearGradient(
-                colors: [
-                  Colors.cyan,
-                  Colors.amber,
-                ],
-                begin:  FractionalOffset(0.0, 0.0),
-                end:  FractionalOffset(1.0, 0.0),
-                stops: [0.0, 1.0],
-                tileMode: TileMode.clamp,
-              )
-          ),
+            colors: [
+              Colors.cyan,
+              Colors.amber,
+            ],
+            begin: FractionalOffset(0.0, 0.0),
+            end: FractionalOffset(1.0, 0.0),
+            stops: [0.0, 1.0],
+            tileMode: TileMode.clamp,
+          )),
         ),
-       title: Text(
+        title: Text(
           sharedPreferences!.getString("name")!,
         ),
         centerTitle: true,
@@ -36,16 +35,16 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Center(
         child: ElevatedButton(
-          child: const Text("Logout"),
           style: ElevatedButton.styleFrom(
             primary: Colors.cyan,
           ),
-          onPressed: ()
-          {
-            firebaseAuth.signOut().then((value){
-              Navigator.push(context, MaterialPageRoute(builder: (c)=> const AuthScreen()));
+          onPressed: () {
+            firebaseAuth.signOut().then((value) {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (c) => const AuthScreen()));
             });
           },
+          child: const Text("Logout"),
         ),
       ),
     );

@@ -8,7 +8,6 @@ import 'package:synergy_user_app/widgets/custom_text_field.dart';
 import 'package:synergy_user_app/widgets/error_dialog.dart';
 import 'package:synergy_user_app/widgets/loading_dialog.dart';
 
-
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -74,36 +73,30 @@ class _LoginScreenState extends State<LoginScreen> {
         .doc(currentUser.uid)
         .get()
         .then((snapshot) async {
-      if(snapshot.exists)
-      {
+      if (snapshot.exists) {
         await sharedPreferences!.setString("uid", currentUser.uid);
-      await sharedPreferences!
-          .setString("email", snapshot.data()!["email"]);
-      await sharedPreferences!
-          .setString("name", snapshot.data()!["name"]);
-      await sharedPreferences!
-          .setString("photoUrl", snapshot.data()!["photoUrl"]);
-      
-      Navigator.pop(context);
-      Navigator.push(context, MaterialPageRoute(builder: (c) => const HomeScreen()));
+        await sharedPreferences!.setString("email", snapshot.data()!["email"]);
+        await sharedPreferences!.setString("name", snapshot.data()!["name"]);
+        await sharedPreferences!
+            .setString("photoUrl", snapshot.data()!["photoUrl"]);
 
-      }
-      else
-      {
+        Navigator.pop(context);
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (c) => const HomeScreen()));
+      } else {
         firebaseAuth.signOut();
         Navigator.pop(context);
-        Navigator.push(context, MaterialPageRoute(builder: (c) => const AuthScreen()));
-        
+        Navigator.push(
+            context, MaterialPageRoute(builder: (c) => const AuthScreen()));
 
-           showDialog(
-                context: context,
-                builder: (c)
-                {
-                  return ErrorDialog(
-                    message: "The account you are trying to login does not exists. ",
-                  );
-                }
-            );
+        showDialog(
+            context: context,
+            builder: (c) {
+              return ErrorDialog(
+                message:
+                    "The account you are trying to login does not exists. ",
+              );
+            });
       }
     });
   }

@@ -7,7 +7,7 @@ import 'package:synergy_user_app/splashScreen/splash_screen.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-   sharedPreferences = await SharedPreferences.getInstance();
+  sharedPreferences = await SharedPreferences.getInstance();
 
   await Firebase.initializeApp();
 
@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Users App',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),

@@ -71,6 +71,7 @@ flutter:
   
   assets:
     - images/
+    - slider/
 
   fonts:
     - family: Acme
