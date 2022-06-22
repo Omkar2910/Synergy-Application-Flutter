@@ -40,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           onPressed: () {
             firebaseAuth.signOut().then((value) {
-              Navigator.push(context,
+              Navigator.pushReplacement(context,
                   MaterialPageRoute(builder: (c) => const AuthScreen()));
             });
           },

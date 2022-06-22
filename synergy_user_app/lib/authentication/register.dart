@@ -5,8 +5,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-import 'package:geocoding/geocoding.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:firebase_storage/firebase_storage.dart' as fStorage;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:synergy_user_app/mainScreens/home_screen.dart';
@@ -35,7 +33,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   String sellerImageUrl = "";
 
-
   Future<void> _getimage() async {
     imageXFile = await _picker.pickImage(source: ImageSource.gallery);
 
@@ -56,7 +53,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     } else {
       if (passwordController.text == confirmPasswordController.text) {
         if (confirmPasswordController.text.isNotEmpty &&
-            emailController.text.isNotEmpty ) {
+            emailController.text.isNotEmpty) {
           // Start Uploading
           showDialog(
               context: context,
@@ -213,8 +210,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     hintText: "Confirm Password",
                     isObsecre: true,
                   ),
-                 
-                
                 ],
               ),
             ),

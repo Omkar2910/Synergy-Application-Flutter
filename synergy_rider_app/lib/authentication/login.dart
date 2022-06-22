@@ -2,19 +2,17 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:synergy_rider_app/authentication/auth_screen.dart';
+import 'package:synergy_rider_app/global/global.dart';
 import 'package:synergy_rider_app/mainScreens/home_screen.dart';
 import 'package:synergy_rider_app/widgets/custom_text_field.dart';
 import 'package:synergy_rider_app/widgets/error_dialog.dart';
 import 'package:synergy_rider_app/widgets/loading_dialog.dart';
 
-import '../global/global.dart';
-
-
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  _LoginScreenState createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
@@ -75,32 +73,32 @@ class _LoginScreenState extends State<LoginScreen> {
         .doc(currentUser.uid)
         .get()
         .then((snapshot) async {
-       if(snapshot.exists)
-          {
-            await sharedPreferences!.setString("uid", currentUser.uid);
-            await sharedPreferences!.setString("email", snapshot.data()!["riderEmail"]);
-            await sharedPreferences!.setString("name", snapshot.data()!["riderName"]);
-            await sharedPreferences!.setString("photoUrl", snapshot.data()!["riderAvatarUrl"]);
+      if (snapshot.exists) {
+        await sharedPreferences!.setString("uid", currentUser.uid);
+        await sharedPreferences!
+            .setString("email", snapshot.data()!["riderEmail"]);
+        await sharedPreferences!
+            .setString("name", snapshot.data()!["riderName"]);
+        await sharedPreferences!
+            .setString("photoUrl", snapshot.data()!["riderAvatarUrl"]);
 
-            Navigator.pop(context);
-            Navigator.push(context, MaterialPageRoute(builder: (c)=> const HomeScreen()));
-          }
-          else
-          {
-            firebaseAuth.signOut();
-            Navigator.pop(context);
-            Navigator.push(context, MaterialPageRoute(builder: (c)=> const AuthScreen()));
+        Navigator.pop(context);
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (c) => const HomeScreen()));
+      } else {
+        firebaseAuth.signOut();
+        Navigator.pop(context);
+        Navigator.push(
+            context, MaterialPageRoute(builder: (c) => const AuthScreen()));
 
-            showDialog(
-                context: context,
-                builder: (c)
-                {
-                  return ErrorDialog(
-                    message: "The account you are trying to login does not exists. ",
-                  );
-                }
-            );
-          }
+        showDialog(
+            context: context,
+            builder: (c) {
+              return ErrorDialog(
+                message: "No record found.",
+              );
+            });
+      }
     });
   }
 
@@ -136,27 +134,28 @@ class _LoginScreenState extends State<LoginScreen> {
                   hintText: "Password",
                   isObsecre: true,
                 ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.cyan,
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 50, vertical: 10),
-                  ),
-                  onPressed: () {
-                    formValidation();
-                  },
-                  child: const Text(
-                    "Login",
-                    style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold),
-                  ),
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
               ],
             ),
-          )
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              primary: Colors.cyan,
+              padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+            ),
+            onPressed: () {
+              formValidation();
+            },
+            child: const Text(
+              "Login",
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 30,
+          ),
         ],
       ),
     );
