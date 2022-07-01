@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'progress_bar.dart';
+import 'package:synergy_rider_app/widgets/progress_bar.dart';
 
 
 class LoadingDialog extends StatelessWidget {
@@ -14,10 +13,12 @@ class LoadingDialog extends StatelessWidget {
       key: key,
       content: Column(
         mainAxisSize: MainAxisSize.min,
-        children: [  
+        children: [
           circularProgress(),
-          const SizedBox(height: 10),
-          Text(message! + ", Please Wait..."),
+          const SizedBox(
+            height: 10,
+          ),
+          Text(message! + ", Please wait..."),
         ],
       ),
     );

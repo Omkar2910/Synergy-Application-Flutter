@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-class CustomTextField extends StatelessWidget {
+
+class CustomTextField extends StatelessWidget
+{
   final TextEditingController? controller;
   final IconData? data;
   final String? hintText;
@@ -16,7 +18,8 @@ class CustomTextField extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context)
+  {
     return Container(
       decoration: const BoxDecoration(
         color: Colors.white,

@@ -3,16 +3,17 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:synergy_rider_app/global/global.dart';
-import 'package:synergy_rider_app/mainScreens/home_screen.dart';
-import 'package:synergy_rider_app/widgets/custom_text_field.dart';
-import 'package:synergy_rider_app/widgets/error_dialog.dart';
-import 'package:synergy_rider_app/widgets/loading_dialog.dart';
+
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as fStorage;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:synergy_rider_app/global/global.dart';
+import 'package:synergy_rider_app/mainScreens/home_screen.dart';
+import 'package:synergy_rider_app/widgets/custom_text_field.dart';
+import 'package:synergy_rider_app/widgets/error_dialog.dart';
+import 'package:synergy_rider_app/widgets/loading_dialog.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -253,7 +254,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   CustomTextField(
                     data: Icons.my_location,
                     controller: locationController,
-                    hintText: "Cafe/Restaurant Address",
+                    hintText: "My Current Address",
                     isObsecre: false,
                     enabled: true,
                   ),

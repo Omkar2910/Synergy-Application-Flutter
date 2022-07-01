@@ -8,6 +8,7 @@ import 'package:synergy_rider_app/widgets/custom_text_field.dart';
 import 'package:synergy_rider_app/widgets/error_dialog.dart';
 import 'package:synergy_rider_app/widgets/loading_dialog.dart';
 
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -83,7 +84,7 @@ class _LoginScreenState extends State<LoginScreen> {
             .setString("photoUrl", snapshot.data()!["riderAvatarUrl"]);
 
         Navigator.pop(context);
-        Navigator.pushReplacement(
+       Navigator.push(
             context, MaterialPageRoute(builder: (c) => const HomeScreen()));
       } else {
         firebaseAuth.signOut();
