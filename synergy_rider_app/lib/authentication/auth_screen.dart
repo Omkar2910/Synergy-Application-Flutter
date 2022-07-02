@@ -35,7 +35,7 @@ class _AuthScreenState extends State<AuthScreen> {
             style: TextStyle(
               fontSize: 60,
               color: Colors.white,
-              fontFamily: "Lobster",
+              fontFamily: "Signatra",
             ),
           ),
           centerTitle: true,
@@ -66,8 +66,8 @@ class _AuthScreenState extends State<AuthScreen> {
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
             colors: [
-              Colors.amber,
               Colors.cyan,
+              Colors.amber,
             ],
           )),
           child: const TabBarView(

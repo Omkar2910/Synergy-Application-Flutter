@@ -3,14 +3,13 @@ import 'package:flutter/material.dart';
 
 circularProgress()
 {
-  return Container( 
+  return Container(
     alignment: Alignment.center,
     padding: const EdgeInsets.only(top: 12),
-    child: const CircularProgressIndicator( 
-      valueColor: AlwaysStoppedAnimation( 
+    child: const CircularProgressIndicator(
+      valueColor: AlwaysStoppedAnimation(
         Colors.amber,
       ),
     ),
   );
-
 }
