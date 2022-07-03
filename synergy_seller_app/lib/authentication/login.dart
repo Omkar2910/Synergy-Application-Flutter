@@ -88,7 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
       } else {
         firebaseAuth.signOut();
         Navigator.pop(context);
-        Navigator.push(
+        Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (c) => const AuthScreen()));
 
         showDialog(

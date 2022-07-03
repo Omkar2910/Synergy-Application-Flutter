@@ -5,7 +5,6 @@ import 'package:synergy_rider_app/authentication/auth_screen.dart';
 import 'package:synergy_rider_app/global/global.dart';
 import 'package:synergy_rider_app/mainScreens/home_screen.dart';
 
-
 class MySplashScreen extends StatefulWidget {
   const MySplashScreen({Key? key}) : super(key: key);
 
@@ -18,12 +17,12 @@ class _MySplashScreenState extends State<MySplashScreen> {
     Timer(const Duration(seconds: 1), () async {
       //if seller is loggedin already
       if (firebaseAuth.currentUser != null) {
-        Navigator.push(
+        Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (c) => const HomeScreen()));
       }
       //if seller is NOT loggedin already
       else {
-        Navigator.push(
+        Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (c) => const AuthScreen()));
       }
     });

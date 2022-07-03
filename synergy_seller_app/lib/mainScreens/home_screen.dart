@@ -45,35 +45,41 @@ class _HomeScreenState extends State<HomeScreen> {
         automaticallyImplyLeading: true,
         actions: [
           IconButton(
-            icon: const Icon(Icons.post_add, color: Colors.white,),
-            onPressed: ()
-            {
-              Navigator.push(context, MaterialPageRoute(builder: (c) => const MenusUploadScreen()));
+            icon: const Icon(
+              Icons.post_add,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (c) => const MenusUploadScreen()));
             },
           ),
         ],
       ),
       body: CustomScrollView(
         slivers: [
-          SliverPersistentHeader(pinned: true, delegate: TextWidgetHeader(title: "My Menus")),
+          SliverPersistentHeader(
+              pinned: true, delegate: TextWidgetHeader(title: "My Menus")),
           StreamBuilder<QuerySnapshot>(
             stream: FirebaseFirestore.instance
                 .collection("sellers")
                 .doc(sharedPreferences!.getString("uid"))
-                .collection("menus").snapshots(),
-            builder: (context, snapshot)
-            {
+                .collection("menus")
+                .snapshots(),
+            builder: (context, snapshot) {
               return !snapshot.hasData
                   ? SliverToBoxAdapter(
-                      child: Center(child: circularProgress(),),
+                      child: Center(
+                        child: circularProgress(),
+                      ),
                     )
                   : SliverStaggeredGrid.countBuilder(
                       crossAxisCount: 1,
                       staggeredTileBuilder: (c) => StaggeredTile.fit(1),
-                      itemBuilder: (context, index)
-                      {
+                      itemBuilder: (context, index) {
                         Menus model = Menus.fromJson(
-                          snapshot.data!.docs[index].data()! as Map<String, dynamic>,
+                          snapshot.data!.docs[index].data()!
+                              as Map<String, dynamic>,
                         );
                         return InfoDesignWidget(
                           model: model,
