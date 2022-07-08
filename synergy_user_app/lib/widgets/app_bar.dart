@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:synergy_user_app/assistantMethods/cart_Item_counter.dart';
 import 'package:synergy_user_app/main.dart';
+import 'package:synergy_user_app/mainScreens/cart_screen.dart';
 
 class MyAppBar extends StatefulWidget with PreferredSizeWidget {
   final PreferredSizeWidget? bottom;
-  MyAppBar({this.bottom});
+  final String? sellerUID;
+  MyAppBar({this.bottom,this.sellerUID});
 
   @override
   _MyAppBarState createState() => _MyAppBarState();
@@ -55,6 +57,7 @@ class _MyAppBarState extends State<MyAppBar> {
               ),
               onPressed: () {
                 //send user to cart screen
+                Navigator.push(context, MaterialPageRoute(builder: (c)=> CartScreen(sellerUID: widget.sellerUID)));
               },
             ),
             Positioned(
