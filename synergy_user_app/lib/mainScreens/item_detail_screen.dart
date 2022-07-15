@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:synergy_user_app/assistantMethods/assistant_methods.dart';
 import 'package:synergy_user_app/models/items.dart';
 import 'package:synergy_user_app/widgets/app_bar.dart';
 import 'package:number_inc_dec/number_inc_dec.dart';
-
-import '../assistantMethods/assistant_methods.dart';
 
 class ItemDetailsScreen extends StatefulWidget {
   final Items? model;
@@ -65,8 +64,8 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
           Center(
             child: InkWell(
               onTap: () {
-                //add to cartint itemCounter = int.parse(counterTextEditingController.text);
                 int itemCounter = int.parse(counterTextEditingController.text);
+
                 List<String> separateItemIDsList = separateItemIDs();
 
                 //1.check if item exist already in cart

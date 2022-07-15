@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:synergy_user_app/assistantMethods/cart_Item_counter.dart';
 import 'package:synergy_user_app/main.dart';
 import 'package:synergy_user_app/mainScreens/cart_screen.dart';
+import 'package:provider/provider.dart';
 
 class MyAppBar extends StatefulWidget with PreferredSizeWidget {
   final PreferredSizeWidget? bottom;
   final String? sellerUID;
-  MyAppBar({this.bottom,this.sellerUID});
+
+  MyAppBar({this.bottom, this.sellerUID});
 
   @override
   _MyAppBarState createState() => _MyAppBarState();
@@ -57,12 +58,16 @@ class _MyAppBarState extends State<MyAppBar> {
               ),
               onPressed: () {
                 //send user to cart screen
-                Navigator.push(context, MaterialPageRoute(builder: (c)=> CartScreen(sellerUID: widget.sellerUID)));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (c) =>
+                            CartScreen(sellerUID: widget.sellerUID)));
               },
             ),
             Positioned(
               child: Stack(
-                children:  [
+                children: [
                   const Icon(
                     Icons.brightness_1,
                     size: 20.0,
@@ -73,11 +78,11 @@ class _MyAppBarState extends State<MyAppBar> {
                     right: 4,
                     child: Center(
                       child: Consumer<CartItemCounter>(
-                        builder: (context, counter, c) 
-                        {
+                        builder: (context, counter, c) {
                           return Text(
                             counter.count.toString(),
-                            style: const TextStyle(color: Colors.white, fontSize: 12),
+                            style: const TextStyle(
+                                color: Colors.white, fontSize: 12),
                           );
                         },
                       ),

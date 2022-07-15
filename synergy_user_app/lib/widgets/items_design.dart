@@ -18,7 +18,7 @@ class _ItemsDesignWidgetState extends State<ItemsDesignWidget> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.pushReplacement(
+        Navigator.push(
             context,
             MaterialPageRoute(
                 builder: (c) => ItemDetailsScreen(model: widget.model)));

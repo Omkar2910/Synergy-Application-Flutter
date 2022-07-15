@@ -18,7 +18,7 @@ class _MenusDesignWidgetState extends State<MenusDesignWidget> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.pushReplacement(
+        Navigator.push(
             context,
             MaterialPageRoute(
                 builder: (c) => ItemsScreen(model: widget.model)));

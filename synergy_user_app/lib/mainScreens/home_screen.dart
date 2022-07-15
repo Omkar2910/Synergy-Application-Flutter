@@ -2,6 +2,9 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:synergy_user_app/assistantMethods/assistant_methods.dart';
+import 'package:synergy_user_app/authentication/auth_screen.dart';
+import 'package:synergy_user_app/global/global.dart';
 import 'package:synergy_user_app/models/sellers.dart';
 import 'package:synergy_user_app/widgets/sellers_design.dart';
 import 'package:synergy_user_app/widgets/my_drawer.dart';
@@ -45,6 +48,13 @@ class _HomeScreenState extends State<HomeScreen> {
     "slider/26.jpg",
     "slider/27.jpg",
   ];
+
+  @override
+  void initState() {
+    super.initState();
+
+    clearCartNow(context);
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:synergy_user_app/models/items.dart';
 
-
-
-class CartItemDesign extends StatefulWidget
-{
+class CartItemDesign extends StatefulWidget {
   final Items? model;
   BuildContext? context;
   final int? quanNumber;
@@ -31,11 +28,16 @@ class _CartItemDesignState extends State<CartItemDesign> {
           width: MediaQuery.of(context).size.width,
           child: Row(
             children: [
-
               //image
-              Image.network(widget.model!.thumbnailUrl!, width: 140, height: 120,),
+              Image.network(
+                widget.model!.thumbnailUrl!,
+                width: 140,
+                height: 120,
+              ),
 
-              const SizedBox(width: 6,),
+              const SizedBox(
+                width: 6,
+              ),
 
               //title
               //quantity number
@@ -91,23 +93,17 @@ class _CartItemDesignState extends State<CartItemDesign> {
                       ),
                       const Text(
                         "€ ",
-                        style: TextStyle(
-                            color: Colors.blue,
-                            fontSize: 16.0
-                        ),
+                        style: TextStyle(color: Colors.blue, fontSize: 16.0),
                       ),
-                      Text(
-                          widget.model!.price.toString(),
+                      Text(widget.model!.price.toString(),
                           style: const TextStyle(
                             fontSize: 16,
                             color: Colors.blue,
-                          )
-                      ),
+                          )),
                     ],
                   ),
                 ],
               ),
-
             ],
           ),
         ),

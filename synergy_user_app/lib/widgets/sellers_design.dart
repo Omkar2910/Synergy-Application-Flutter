@@ -17,7 +17,7 @@ class _SellersDesignWidgetState extends State<SellersDesignWidget> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.pushReplacement(
+        Navigator.push(
             context,
             MaterialPageRoute(
                 builder: (c) => MenusScreen(model: widget.model)));

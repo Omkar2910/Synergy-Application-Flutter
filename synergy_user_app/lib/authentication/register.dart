@@ -3,22 +3,22 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-
-import 'package:firebase_storage/firebase_storage.dart' as fStorage;
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:synergy_user_app/global/global.dart';
 import 'package:synergy_user_app/mainScreens/home_screen.dart';
 import 'package:synergy_user_app/widgets/custom_text_field.dart';
 import 'package:synergy_user_app/widgets/error_dialog.dart';
 import 'package:synergy_user_app/widgets/loading_dialog.dart';
-
-import '../global/global.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart' as fStorage;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
 
   @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
+  _RegisterScreenState createState() => _RegisterScreenState();
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
@@ -33,9 +33,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   String sellerImageUrl = "";
 
-  Future<void> _getimage() async {
+  Future<void> _getImage() async {
     imageXFile = await _picker.pickImage(source: ImageSource.gallery);
-
     setState(() {
       imageXFile;
     });
@@ -47,20 +46,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
           context: context,
           builder: (c) {
             return ErrorDialog(
-              message: "Please select an image",
+              message: "Please select an image.",
             );
           });
     } else {
       if (passwordController.text == confirmPasswordController.text) {
         if (confirmPasswordController.text.isNotEmpty &&
-            emailController.text.isNotEmpty) {
-          // Start Uploading
+            emailController.text.isNotEmpty &&
+            nameController.text.isNotEmpty) {
+          //start uploading image
           showDialog(
               context: context,
               builder: (c) {
                 return LoadingDialog(
-                  message:
-                      "Registering Account", // Custom Widget loading_dialog.dart
+                  message: "Registering Account",
                 );
               });
 
@@ -85,7 +84,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               builder: (c) {
                 return ErrorDialog(
                   message:
-                      "Please enter all the required details for Registration.",
+                      "Please write the complete required info for Registration.",
                 );
               });
         }
@@ -94,7 +93,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             context: context,
             builder: (c) {
               return ErrorDialog(
-                message: "Password and ConfirmPassword does not match.",
+                message: "Password do not match.",
               );
             });
       }
@@ -125,7 +124,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     if (currentUser != null) {
       saveDataToFirestore(currentUser!).then((value) {
         Navigator.pop(context);
-        // send user to the home screen
+        //send user to homePage
         Route newRoute = MaterialPageRoute(builder: (c) => HomeScreen());
         Navigator.pushReplacement(context, newRoute);
       });
@@ -143,7 +142,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
     });
 
     //save data locally
-
     sharedPreferences = await SharedPreferences.getInstance();
     await sharedPreferences!.setString("uid", currentUser.uid);
     await sharedPreferences!.setString("email", currentUser.email.toString());
@@ -164,7 +162,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ),
             InkWell(
               onTap: () {
-                _getimage(); //calling this function to pick image from gallary
+                _getImage();
               },
               child: CircleAvatar(
                 radius: MediaQuery.of(context).size.width * 0.20,
@@ -221,15 +219,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 primary: Colors.cyan,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+                padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
               ),
               onPressed: () {
                 formValidation();
               },
-              child: const Text("Sign Up",
-                  style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.bold)),
+              child: const Text(
+                "Sign Up",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
             const SizedBox(
               height: 30,

@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:synergy_user_app/assistantMethods/assistant_methods.dart';
 import 'package:synergy_user_app/global/global.dart';
 import 'package:synergy_user_app/models/menus.dart';
 import 'package:synergy_user_app/models/sellers.dart';
+import 'package:synergy_user_app/splashScreen/splash_screen.dart';
 import 'package:synergy_user_app/widgets/menus_design.dart';
 import 'package:synergy_user_app/widgets/sellers_design.dart';
 import 'package:synergy_user_app/widgets/my_drawer.dart';
@@ -22,7 +24,6 @@ class _MenusScreenState extends State<MenusScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: MyDrawer(),
       appBar: AppBar(
         flexibleSpace: Container(
           decoration: const BoxDecoration(
@@ -36,6 +37,15 @@ class _MenusScreenState extends State<MenusScreen> {
             stops: [0.0, 1.0],
             tileMode: TileMode.clamp,
           )),
+        ),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            clearCartNow(context);
+
+            Navigator.push(context,
+                MaterialPageRoute(builder: (c) => const MySplashScreen()));
+          },
         ),
         title: const Text(
           "iFood",
