@@ -5,6 +5,9 @@ import 'package:synergy_user_app/authentication/auth_screen.dart';
 import 'package:synergy_user_app/global/global.dart';
 import 'package:synergy_user_app/mainScreens/home_screen.dart';
 
+
+
+
 class MySplashScreen extends StatefulWidget {
   const MySplashScreen({Key? key}) : super(key: key);
 
@@ -12,18 +15,23 @@ class MySplashScreen extends StatefulWidget {
   _MySplashScreenState createState() => _MySplashScreenState();
 }
 
-class _MySplashScreenState extends State<MySplashScreen> {
-  startTimer() {
-    Timer(const Duration(seconds: 1), () async {
+
+
+class _MySplashScreenState extends State<MySplashScreen>
+{
+  startTimer()
+  {
+    Timer(const Duration(seconds: 1), () async
+    {
       //if seller is loggedin already
-      if (firebaseAuth.currentUser != null) {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (c) => const HomeScreen()));
+      if(firebaseAuth.currentUser != null)
+      {
+        Navigator.push(context, MaterialPageRoute(builder: (c)=> const HomeScreen()));
       }
       //if seller is NOT loggedin already
-      else {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (c) => const AuthScreen()));
+      else
+      {
+        Navigator.push(context, MaterialPageRoute(builder: (c)=> const AuthScreen()));
       }
     });
   }
@@ -40,7 +48,7 @@ class _MySplashScreenState extends State<MySplashScreen> {
     return Material(
       child: Container(
         decoration: const BoxDecoration(
-          gradient: LinearGradient(
+          gradient:  LinearGradient(
             colors: [
               Colors.amber,
               Colors.cyan,
@@ -55,13 +63,14 @@ class _MySplashScreenState extends State<MySplashScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Image.asset("images/welcome.png"),
               ),
-              const SizedBox(
-                height: 10,
-              ),
+
+              const SizedBox(height: 10,),
+
               const Padding(
                 padding: EdgeInsets.all(18.0),
                 child: Text(

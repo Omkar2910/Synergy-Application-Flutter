@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:synergy_user_app/authentication/auth_screen.dart';
 import 'package:synergy_user_app/global/global.dart';
+import 'package:synergy_user_app/mainScreens/home_screen.dart';
+import 'package:synergy_user_app/mainScreens/my_orders_screen.dart';
 
-class MyDrawer extends StatelessWidget {
+
+class MyDrawer extends StatelessWidget
+{
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context)
+  {
     return Drawer(
       child: ListView(
         children: [
@@ -23,26 +29,22 @@ class MyDrawer extends StatelessWidget {
                       width: 160,
                       child: CircleAvatar(
                         backgroundImage: NetworkImage(
-                            sharedPreferences!.getString("photoUrl")!),
+                          sharedPreferences!.getString("photoUrl")!
+                        ),
                       ),
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
+                const SizedBox(height: 10,),
                 Text(
-                  sharedPreferences!.getString("name")!,
-                  style: TextStyle(
-                      color: Colors.black, fontSize: 20, fontFamily: "Train"),
+                    sharedPreferences!.getString("name")!,
+                  style: TextStyle(color: Colors.black, fontSize: 20, fontFamily: "Train"),
                 ),
               ],
             ),
           ),
 
-          const SizedBox(
-            height: 12,
-          ),
+          const SizedBox(height: 12,),
 
           //body drawer
           Container(
@@ -55,15 +57,15 @@ class MyDrawer extends StatelessWidget {
                   thickness: 2,
                 ),
                 ListTile(
-                  leading: const Icon(
-                    Icons.home,
-                    color: Colors.black,
-                  ),
+                  leading: const Icon(Icons.home, color: Colors.black,),
                   title: const Text(
                     "Home",
                     style: TextStyle(color: Colors.black),
                   ),
-                  onTap: () {},
+                  onTap: ()
+                  {
+                    Navigator.push(context, MaterialPageRoute(builder: (c)=> const HomeScreen()));
+                  },
                 ),
                 const Divider(
                   height: 10,
@@ -71,15 +73,15 @@ class MyDrawer extends StatelessWidget {
                   thickness: 2,
                 ),
                 ListTile(
-                  leading: const Icon(
-                    Icons.reorder,
-                    color: Colors.black,
-                  ),
+                  leading: const Icon(Icons.reorder, color: Colors.black,),
                   title: const Text(
                     "My Orders",
                     style: TextStyle(color: Colors.black),
                   ),
-                  onTap: () {},
+                  onTap: ()
+                  {
+                    Navigator.push(context, MaterialPageRoute(builder: (c)=> MyOrdersScreen()));
+                  },
                 ),
                 const Divider(
                   height: 10,
@@ -87,15 +89,15 @@ class MyDrawer extends StatelessWidget {
                   thickness: 2,
                 ),
                 ListTile(
-                  leading: const Icon(
-                    Icons.access_time,
-                    color: Colors.black,
-                  ),
+                  leading: const Icon(Icons.access_time, color: Colors.black,),
                   title: const Text(
                     "History",
                     style: TextStyle(color: Colors.black),
                   ),
-                  onTap: () {},
+                  onTap: ()
+                  {
+
+                  },
                 ),
                 const Divider(
                   height: 10,
@@ -103,15 +105,15 @@ class MyDrawer extends StatelessWidget {
                   thickness: 2,
                 ),
                 ListTile(
-                  leading: const Icon(
-                    Icons.search,
-                    color: Colors.black,
-                  ),
+                  leading: const Icon(Icons.search, color: Colors.black,),
                   title: const Text(
                     "Search",
                     style: TextStyle(color: Colors.black),
                   ),
-                  onTap: () {},
+                  onTap: ()
+                  {
+
+                  },
                 ),
                 const Divider(
                   height: 10,
@@ -119,15 +121,15 @@ class MyDrawer extends StatelessWidget {
                   thickness: 2,
                 ),
                 ListTile(
-                  leading: const Icon(
-                    Icons.add_location,
-                    color: Colors.black,
-                  ),
+                  leading: const Icon(Icons.add_location, color: Colors.black,),
                   title: const Text(
                     "Add New Address",
                     style: TextStyle(color: Colors.black),
                   ),
-                  onTap: () {},
+                  onTap: ()
+                  {
+
+                  },
                 ),
                 const Divider(
                   height: 10,
@@ -135,20 +137,15 @@ class MyDrawer extends StatelessWidget {
                   thickness: 2,
                 ),
                 ListTile(
-                  leading: const Icon(
-                    Icons.exit_to_app,
-                    color: Colors.black,
-                  ),
+                  leading: const Icon(Icons.exit_to_app, color: Colors.black,),
                   title: const Text(
                     "Sign Out",
                     style: TextStyle(color: Colors.black),
                   ),
-                  onTap: () {
-                    firebaseAuth.signOut().then((value) {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (c) => const AuthScreen()));
+                  onTap: ()
+                  {
+                    firebaseAuth.signOut().then((value){
+                      Navigator.push(context, MaterialPageRoute(builder: (c)=> const AuthScreen()));
                     });
                   },
                 ),

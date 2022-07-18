@@ -14,6 +14,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as fStorage;
 import 'package:shared_preferences/shared_preferences.dart';
 
+
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
 
@@ -21,7 +22,8 @@ class RegisterScreen extends StatefulWidget {
   _RegisterScreenState createState() => _RegisterScreenState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class _RegisterScreenState extends State<RegisterScreen>
+{
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
@@ -33,95 +35,111 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   String sellerImageUrl = "";
 
-  Future<void> _getImage() async {
+
+
+  Future<void> _getImage() async
+  {
     imageXFile = await _picker.pickImage(source: ImageSource.gallery);
     setState(() {
       imageXFile;
     });
   }
 
-  Future<void> formValidation() async {
-    if (imageXFile == null) {
+
+  Future<void> formValidation() async
+  {
+    if(imageXFile == null)
+    {
       showDialog(
-          context: context,
-          builder: (c) {
-            return ErrorDialog(
-              message: "Please select an image.",
-            );
-          });
-    } else {
-      if (passwordController.text == confirmPasswordController.text) {
-        if (confirmPasswordController.text.isNotEmpty &&
-            emailController.text.isNotEmpty &&
-            nameController.text.isNotEmpty) {
+        context: context,
+        builder: (c)
+        {
+          return ErrorDialog(
+            message: "Please select an image.",
+          );
+        }
+      );
+    }
+    else
+    {
+      if(passwordController.text == confirmPasswordController.text)
+      {
+        if(confirmPasswordController.text.isNotEmpty && emailController.text.isNotEmpty && nameController.text.isNotEmpty)
+        {
           //start uploading image
           showDialog(
-              context: context,
-              builder: (c) {
-                return LoadingDialog(
-                  message: "Registering Account",
-                );
-              });
+            context: context,
+            builder: (c)
+            {
+              return LoadingDialog(
+                message: "Registering Account",
+              );
+            }
+          );
 
           String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-          fStorage.Reference reference = fStorage.FirebaseStorage.instance
-              .ref()
-              .child("users")
-              .child(fileName);
-          fStorage.UploadTask uploadTask =
-              reference.putFile(File(imageXFile!.path));
-          fStorage.TaskSnapshot taskSnapshot =
-              await uploadTask.whenComplete(() {});
+          fStorage.Reference reference = fStorage.FirebaseStorage.instance.ref().child("users").child(fileName);
+          fStorage.UploadTask uploadTask = reference.putFile(File(imageXFile!.path));
+          fStorage.TaskSnapshot taskSnapshot = await uploadTask.whenComplete(() {});
           await taskSnapshot.ref.getDownloadURL().then((url) {
             sellerImageUrl = url;
 
             //save info to firestore
             authenticateSellerAndSignUp();
           });
-        } else {
+        }
+        else
+        {
           showDialog(
               context: context,
-              builder: (c) {
+              builder: (c)
+              {
                 return ErrorDialog(
-                  message:
-                      "Please write the complete required info for Registration.",
+                  message: "Please write the complete required info for Registration.",
                 );
-              });
+              }
+          );
         }
-      } else {
+      }
+      else
+      {
         showDialog(
             context: context,
-            builder: (c) {
+            builder: (c)
+            {
               return ErrorDialog(
                 message: "Password do not match.",
               );
-            });
+            }
+        );
       }
     }
   }
 
-  void authenticateSellerAndSignUp() async {
+  void authenticateSellerAndSignUp() async
+  {
     User? currentUser;
 
-    await firebaseAuth
-        .createUserWithEmailAndPassword(
+    await firebaseAuth.createUserWithEmailAndPassword(
       email: emailController.text.trim(),
       password: passwordController.text.trim(),
-    )
-        .then((auth) {
+    ).then((auth) {
       currentUser = auth.user;
-    }).catchError((error) {
+    }).catchError((error){
       Navigator.pop(context);
       showDialog(
           context: context,
-          builder: (c) {
+          builder: (c)
+          {
             return ErrorDialog(
               message: error.message.toString(),
             );
-          });
+          }
+      );
     });
 
-    if (currentUser != null) {
+    if(currentUser != null)
+    {
       saveDataToFirestore(currentUser!).then((value) {
         Navigator.pop(context);
         //send user to homePage
@@ -131,7 +149,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
     }
   }
 
-  Future saveDataToFirestore(User currentUser) async {
+  Future saveDataToFirestore(User currentUser) async
+  {
     FirebaseFirestore.instance.collection("users").doc(currentUser.uid).set({
       "uid": currentUser.uid,
       "email": currentUser.email,
@@ -157,31 +176,26 @@ class _RegisterScreenState extends State<RegisterScreen> {
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
-            const SizedBox(
-              height: 10,
-            ),
+            const SizedBox(height: 10,),
             InkWell(
-              onTap: () {
+              onTap: ()
+              {
                 _getImage();
               },
               child: CircleAvatar(
                 radius: MediaQuery.of(context).size.width * 0.20,
                 backgroundColor: Colors.white,
-                backgroundImage: imageXFile == null
-                    ? null
-                    : FileImage(File(imageXFile!.path)),
+                backgroundImage: imageXFile==null ? null : FileImage(File(imageXFile!.path)),
                 child: imageXFile == null
-                    ? Icon(
-                        Icons.add_photo_alternate,
-                        size: MediaQuery.of(context).size.width * 0.20,
-                        color: Colors.grey,
-                      )
-                    : null,
+                    ?
+                Icon(
+                  Icons.add_photo_alternate,
+                  size: MediaQuery.of(context).size.width * 0.20,
+                  color: Colors.grey,
+                ) : null,
               ),
             ),
-            const SizedBox(
-              height: 10,
-            ),
+            const SizedBox(height: 10,),
             Form(
               key: _formKey,
               child: Column(
@@ -213,28 +227,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ],
               ),
             ),
-            const SizedBox(
-              height: 30,
-            ),
+            const SizedBox(height: 30,),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 primary: Colors.cyan,
                 padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
               ),
-              onPressed: () {
+              onPressed: ()
+              {
                 formValidation();
               },
               child: const Text(
                 "Sign Up",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold,),
               ),
             ),
-            const SizedBox(
-              height: 30,
-            ),
+            const SizedBox(height: 30,),
           ],
         ),
       ),

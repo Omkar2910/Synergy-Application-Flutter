@@ -8,7 +8,8 @@ import 'package:synergy_user_app/widgets/text_field.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 
-class SaveAddressScreen extends StatelessWidget {
+class SaveAddressScreen extends StatelessWidget
+{
   final _name = TextEditingController();
   final _phoneNumber = TextEditingController();
   final _flatNumber = TextEditingController();
@@ -20,42 +21,44 @@ class SaveAddressScreen extends StatelessWidget {
   List<Placemark>? placemarks;
   Position? position;
 
-  getUserLocationAddress() async {
-    LocationPermission permission;
-    permission = await Geolocator.requestPermission();
+
+  getUserLocationAddress() async
+  {
     Position newPosition = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
+        desiredAccuracy: LocationAccuracy.high
+    );
 
     position = newPosition;
 
-    placemarks =
-        await placemarkFromCoordinates(position!.latitude, position!.longitude);
+    placemarks = await placemarkFromCoordinates(
+        position!.latitude, position!.longitude
+    );
 
     Placemark pMark = placemarks![0];
 
-    String fullAddress =
-        '${pMark.subThoroughfare} ${pMark.thoroughfare}, ${pMark.subLocality} ${pMark.locality}, ${pMark.subAdministrativeArea}, ${pMark.administrativeArea} ${pMark.postalCode}, ${pMark.country}';
+    String fullAddress = '${pMark.subThoroughfare} ${pMark.thoroughfare}, ${pMark.subLocality} ${pMark.locality}, ${pMark.subAdministrativeArea}, ${pMark.administrativeArea} ${pMark.postalCode}, ${pMark.country}';
 
     _locationController.text = fullAddress;
 
-    _flatNumber.text =
-        '${pMark.subThoroughfare} ${pMark.thoroughfare}, ${pMark.subLocality} ${pMark.locality}';
-    _city.text =
-        '${pMark.subAdministrativeArea}, ${pMark.administrativeArea} ${pMark.postalCode}';
+    _flatNumber.text = '${pMark.subThoroughfare} ${pMark.thoroughfare}, ${pMark.subLocality} ${pMark.locality}';
+    _city.text = '${pMark.subAdministrativeArea}, ${pMark.administrativeArea} ${pMark.postalCode}';
     _state.text = '${pMark.country}';
     _completeAddress.text = fullAddress;
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context)
+  {
     return Scaffold(
-      appBar: SimpleAppBar(),
+      appBar: SimpleAppBar(title: "iFood",),
       floatingActionButton: FloatingActionButton.extended(
         label: const Text("Save Now"),
         icon: const Icon(Icons.save),
-        onPressed: () {
+        onPressed: ()
+        {
           //save address info
-          if (formKey.currentState!.validate()) {
+          if(formKey.currentState!.validate())
+          {
             final model = Address(
               name: _name.text.trim(),
               state: _state.text.trim(),
@@ -66,14 +69,13 @@ class SaveAddressScreen extends StatelessWidget {
               lat: position!.latitude,
               lng: position!.longitude,
             ).toJson();
-
-            FirebaseFirestore.instance
-                .collection("users")
+            
+            FirebaseFirestore.instance.collection("users")
                 .doc(sharedPreferences!.getString("uid"))
                 .collection("userAddress")
                 .doc(DateTime.now().millisecondsSinceEpoch.toString())
-                .set(model)
-                .then((value) {
+                .set(model).then((value)
+            {
               Fluttertoast.showToast(msg: "New Address has been saved.");
               formKey.currentState!.reset();
             });
@@ -83,22 +85,21 @@ class SaveAddressScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const SizedBox(
-              height: 6,
-            ),
+            const SizedBox(height: 6,),
             const Align(
               child: Padding(
                 padding: EdgeInsets.all(8),
                 child: Text(
                   "Save New Address:",
                   style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
                   ),
                 ),
               ),
             ),
+
             ListTile(
               leading: const Icon(
                 Icons.person_pin_circle,
@@ -121,18 +122,15 @@ class SaveAddressScreen extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(
-              height: 6,
-            ),
+
+            const SizedBox(height: 6,),
+
             ElevatedButton.icon(
               label: const Text(
                 "Get my Location",
                 style: TextStyle(color: Colors.white),
               ),
-              icon: const Icon(
-                Icons.location_on,
-                color: Colors.white,
-              ),
+              icon: const Icon(Icons.location_on, color: Colors.white,),
               style: ButtonStyle(
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
@@ -141,11 +139,13 @@ class SaveAddressScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              onPressed: () {
+              onPressed: ()
+              {
                 //getCurrentLocationWithAddress
                 getUserLocationAddress();
               },
             ),
+
             Form(
               key: formKey,
               child: Column(

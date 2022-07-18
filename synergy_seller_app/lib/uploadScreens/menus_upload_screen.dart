@@ -79,10 +79,6 @@ class _MenusUploadScreenState extends State<MenusUploadScreen> {
                 size: 200.0,
               ),
               ElevatedButton(
-                child: const Text(
-                  "Add New Menu",
-                  style: TextStyle(color: Colors.white, fontSize: 18),
-                ),
                 style: ButtonStyle(
                   backgroundColor:
                       MaterialStateProperty.all<Color>(Colors.amber),
@@ -94,6 +90,10 @@ class _MenusUploadScreenState extends State<MenusUploadScreen> {
                 onPressed: () {
                   takeImage(context);
                 },
+                child: const Text(
+                  "Add New Menu",
+                  style: TextStyle(color: Colors.white, fontSize: 18),
+                ),
               ),
             ],
           ),
@@ -220,6 +220,7 @@ class _MenusUploadScreenState extends State<MenusUploadScreen> {
         ),
         actions: [
           TextButton(
+            onPressed: uploading ? null : ()=> validateUploadForm(),
             child: const Text(
               "+",
               style: TextStyle(
@@ -228,7 +229,6 @@ class _MenusUploadScreenState extends State<MenusUploadScreen> {
                 
               ),
             ),
-            onPressed: uploading ? null : ()=> validateUploadForm(),
             
           ),
         ],

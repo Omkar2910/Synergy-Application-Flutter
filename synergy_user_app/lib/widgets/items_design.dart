@@ -3,7 +3,9 @@ import 'package:synergy_user_app/mainScreens/item_detail_screen.dart';
 import 'package:synergy_user_app/models/items.dart';
 import 'package:synergy_user_app/models/sellers.dart';
 
-class ItemsDesignWidget extends StatefulWidget {
+
+class ItemsDesignWidget extends StatefulWidget
+{
   Items? model;
   BuildContext? context;
 
@@ -13,15 +15,15 @@ class ItemsDesignWidget extends StatefulWidget {
   _ItemsDesignWidgetState createState() => _ItemsDesignWidgetState();
 }
 
+
+
 class _ItemsDesignWidgetState extends State<ItemsDesignWidget> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (c) => ItemDetailsScreen(model: widget.model)));
+      onTap: ()
+      {
+        Navigator.push(context, MaterialPageRoute(builder: (c)=> ItemDetailsScreen(model: widget.model)));
       },
       splashColor: Colors.amber,
       child: Padding(
@@ -41,9 +43,7 @@ class _ItemsDesignWidgetState extends State<ItemsDesignWidget> {
                 height: 220.0,
                 fit: BoxFit.cover,
               ),
-              const SizedBox(
-                height: 1.0,
-              ),
+              const SizedBox(height: 1.0,),
               Text(
                 widget.model!.title!,
                 style: const TextStyle(

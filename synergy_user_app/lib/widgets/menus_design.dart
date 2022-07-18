@@ -3,7 +3,9 @@ import 'package:synergy_user_app/mainScreens/items_screen.dart';
 import 'package:synergy_user_app/models/menus.dart';
 import 'package:synergy_user_app/models/sellers.dart';
 
-class MenusDesignWidget extends StatefulWidget {
+
+class MenusDesignWidget extends StatefulWidget
+{
   Menus? model;
   BuildContext? context;
 
@@ -13,15 +15,15 @@ class MenusDesignWidget extends StatefulWidget {
   _MenusDesignWidgetState createState() => _MenusDesignWidgetState();
 }
 
+
+
 class _MenusDesignWidgetState extends State<MenusDesignWidget> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (c) => ItemsScreen(model: widget.model)));
+      onTap: ()
+      {
+        Navigator.push(context, MaterialPageRoute(builder: (c)=> ItemsScreen(model: widget.model)));
       },
       splashColor: Colors.amber,
       child: Padding(
@@ -41,9 +43,7 @@ class _MenusDesignWidgetState extends State<MenusDesignWidget> {
                 height: 220.0,
                 fit: BoxFit.cover,
               ),
-              const SizedBox(
-                height: 1.0,
-              ),
+              const SizedBox(height: 1.0,),
               Text(
                 widget.model!.menuTitle!,
                 style: const TextStyle(

@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:synergy_user_app/mainScreens/menus_screen.dart';
 import 'package:synergy_user_app/models/sellers.dart';
 
-class SellersDesignWidget extends StatefulWidget {
+
+class SellersDesignWidget extends StatefulWidget
+{
   Sellers? model;
   BuildContext? context;
 
@@ -12,15 +14,15 @@ class SellersDesignWidget extends StatefulWidget {
   _SellersDesignWidgetState createState() => _SellersDesignWidgetState();
 }
 
+
+
 class _SellersDesignWidgetState extends State<SellersDesignWidget> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (c) => MenusScreen(model: widget.model)));
+      onTap: ()
+      {
+        Navigator.push(context, MaterialPageRoute(builder: (c)=> MenusScreen(model: widget.model)));
       },
       splashColor: Colors.amber,
       child: Padding(
@@ -36,13 +38,11 @@ class _SellersDesignWidgetState extends State<SellersDesignWidget> {
                 color: Colors.grey[300],
               ),
               Image.network(
-                widget.model!.sellerAvatarUrl!,
-                height: 220.0,
+                  widget.model!.sellerAvatarUrl!,
+                  height: 220.0,
                 fit: BoxFit.cover,
               ),
-              const SizedBox(
-                height: 1.0,
-              ),
+              const SizedBox(height: 1.0,),
               Text(
                 widget.model!.sellerName!,
                 style: const TextStyle(

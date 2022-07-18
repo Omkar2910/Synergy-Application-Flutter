@@ -88,13 +88,6 @@ class _ItemsUploadScreenState extends State<ItemsUploadScreen>
             children: [
               const Icon(Icons.shop_two, color: Colors.white, size: 200.0,),
               ElevatedButton(
-                child: const Text(
-                  "Add New Item",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                  ),
-                ),
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all<Color>(Colors.amber),
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -107,6 +100,13 @@ class _ItemsUploadScreenState extends State<ItemsUploadScreen>
                 {
                   takeImage(context);
                 },
+                child: const Text(
+                  "Add New Item",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                  ),
+                ),
               ),
             ],
           ),
@@ -125,18 +125,18 @@ class _ItemsUploadScreenState extends State<ItemsUploadScreen>
           title: const Text("Menu Image", style: TextStyle(color: Colors.amber, fontWeight: FontWeight.bold),),
           children: [
             SimpleDialogOption(
+              onPressed: captureImageWithCamera,
               child: const Text(
                 "Capture with Camera",
                 style: TextStyle(color: Colors.grey),
               ),
-              onPressed: captureImageWithCamera,
             ),
             SimpleDialogOption(
+              onPressed: pickImageFromGallery,
               child: const Text(
                 "Select from Gallery",
                 style: TextStyle(color: Colors.grey),
               ),
-              onPressed: pickImageFromGallery,
             ),
             SimpleDialogOption(
               child: const Text(
@@ -215,6 +215,7 @@ class _ItemsUploadScreenState extends State<ItemsUploadScreen>
         ),
         actions: [
           TextButton(
+            onPressed: uploading ? null : ()=> validateUploadForm(),
             child: const Text(
               "+",
               style: TextStyle(
@@ -225,7 +226,6 @@ class _ItemsUploadScreenState extends State<ItemsUploadScreen>
                 letterSpacing: 3,
               ),
             ),
-            onPressed: uploading ? null : ()=> validateUploadForm(),
           ),
         ],
       ),

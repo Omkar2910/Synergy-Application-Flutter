@@ -12,13 +12,17 @@ import 'package:synergy_user_app/widgets/my_drawer.dart';
 import 'package:synergy_user_app/widgets/progress_bar.dart';
 import 'package:synergy_user_app/widgets/text_widget_header.dart';
 
-class MenusScreen extends StatefulWidget {
+
+class MenusScreen extends StatefulWidget
+{
   final Sellers? model;
   MenusScreen({this.model});
 
   @override
   _MenusScreenState createState() => _MenusScreenState();
 }
+
+
 
 class _MenusScreenState extends State<MenusScreen> {
   @override
@@ -28,23 +32,24 @@ class _MenusScreenState extends State<MenusScreen> {
         flexibleSpace: Container(
           decoration: const BoxDecoration(
               gradient: LinearGradient(
-            colors: [
-              Colors.cyan,
-              Colors.amber,
-            ],
-            begin: FractionalOffset(0.0, 0.0),
-            end: FractionalOffset(1.0, 0.0),
-            stops: [0.0, 1.0],
-            tileMode: TileMode.clamp,
-          )),
+                colors: [
+                  Colors.cyan,
+                  Colors.amber,
+                ],
+                begin:  FractionalOffset(0.0, 0.0),
+                end:  FractionalOffset(1.0, 0.0),
+                stops: [0.0, 1.0],
+                tileMode: TileMode.clamp,
+              )
+          ),
         ),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () {
+          onPressed: ()
+          {
             clearCartNow(context);
 
-            Navigator.push(context,
-                MaterialPageRoute(builder: (c) => const MySplashScreen()));
+            Navigator.push(context, MaterialPageRoute(builder: (c)=> const MySplashScreen()));
           },
         ),
         title: const Text(
@@ -56,10 +61,7 @@ class _MenusScreenState extends State<MenusScreen> {
       ),
       body: CustomScrollView(
         slivers: [
-          SliverPersistentHeader(
-              pinned: true,
-              delegate: TextWidgetHeader(
-                  title: widget.model!.sellerName.toString() + " Menus")),
+          SliverPersistentHeader(pinned: true, delegate: TextWidgetHeader(title: widget.model!.sellerName.toString() + " Menus")),
           StreamBuilder<QuerySnapshot>(
             stream: FirebaseFirestore.instance
                 .collection("sellers")
@@ -67,28 +69,27 @@ class _MenusScreenState extends State<MenusScreen> {
                 .collection("menus")
                 .orderBy("publishedDate", descending: true)
                 .snapshots(),
-            builder: (context, snapshot) {
+            builder: (context, snapshot)
+            {
               return !snapshot.hasData
                   ? SliverToBoxAdapter(
-                      child: Center(
-                        child: circularProgress(),
-                      ),
-                    )
+                child: Center(child: circularProgress(),),
+              )
                   : SliverStaggeredGrid.countBuilder(
-                      crossAxisCount: 1,
-                      staggeredTileBuilder: (c) => StaggeredTile.fit(1),
-                      itemBuilder: (context, index) {
-                        Menus model = Menus.fromJson(
-                          snapshot.data!.docs[index].data()!
-                              as Map<String, dynamic>,
-                        );
-                        return MenusDesignWidget(
-                          model: model,
-                          context: context,
-                        );
-                      },
-                      itemCount: snapshot.data!.docs.length,
-                    );
+                crossAxisCount: 1,
+                staggeredTileBuilder: (c) => StaggeredTile.fit(1),
+                itemBuilder: (context, index)
+                {
+                  Menus model = Menus.fromJson(
+                    snapshot.data!.docs[index].data()! as Map<String, dynamic>,
+                  );
+                  return MenusDesignWidget(
+                    model: model,
+                    context: context,
+                  );
+                },
+                itemCount: snapshot.data!.docs.length,
+              );
             },
           ),
         ],

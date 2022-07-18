@@ -5,7 +5,8 @@ import 'package:synergy_user_app/maps/maps.dart';
 import 'package:synergy_user_app/models/address.dart';
 import 'package:provider/provider.dart';
 
-class AddressDesign extends StatefulWidget {
+class AddressDesign extends StatefulWidget
+{
   final Address? model;
   final int? currentIndex;
   final int? value;
@@ -26,19 +27,23 @@ class AddressDesign extends StatefulWidget {
   _AddressDesignState createState() => _AddressDesignState();
 }
 
-class _AddressDesignState extends State<AddressDesign> {
+
+
+class _AddressDesignState extends State<AddressDesign>
+{
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
+      onTap: ()
+      {
         //select this address
-        Provider.of<AddressChanger>(context, listen: false)
-            .displayResult(widget.value);
+        Provider.of<AddressChanger>(context, listen: false).displayResult(widget.value);
       },
       child: Card(
         color: Colors.cyan.withOpacity(0.4),
         child: Column(
           children: [
+
             //address info
             Row(
               children: [
@@ -46,10 +51,10 @@ class _AddressDesignState extends State<AddressDesign> {
                   groupValue: widget.currentIndex!,
                   value: widget.value!,
                   activeColor: Colors.amber,
-                  onChanged: (val) {
+                  onChanged: (val)
+                  {
                     //provider
-                    Provider.of<AddressChanger>(context, listen: false)
-                        .displayResult(val);
+                    Provider.of<AddressChanger>(context, listen: false).displayResult(val);
                     print(val);
                   },
                 ),
@@ -65,9 +70,7 @@ class _AddressDesignState extends State<AddressDesign> {
                             children: [
                               const Text(
                                 "Name: ",
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold),
+                                style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
                               ),
                               Text(widget.model!.name.toString()),
                             ],
@@ -76,9 +79,7 @@ class _AddressDesignState extends State<AddressDesign> {
                             children: [
                               const Text(
                                 "Phone Number: ",
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold),
+                                style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
                               ),
                               Text(widget.model!.phoneNumber.toString()),
                             ],
@@ -87,9 +88,7 @@ class _AddressDesignState extends State<AddressDesign> {
                             children: [
                               const Text(
                                 "Flat Number: ",
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold),
+                                style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
                               ),
                               Text(widget.model!.flatNumber.toString()),
                             ],
@@ -98,9 +97,7 @@ class _AddressDesignState extends State<AddressDesign> {
                             children: [
                               const Text(
                                 "City: ",
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold),
+                                style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
                               ),
                               Text(widget.model!.city.toString()),
                             ],
@@ -109,9 +106,7 @@ class _AddressDesignState extends State<AddressDesign> {
                             children: [
                               const Text(
                                 "State: ",
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold),
+                                style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
                               ),
                               Text(widget.model!.state.toString()),
                             ],
@@ -120,9 +115,7 @@ class _AddressDesignState extends State<AddressDesign> {
                             children: [
                               const Text(
                                 "Full Address: ",
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold),
+                                style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
                               ),
                               Text(widget.model!.fullAddress.toString()),
                             ],
@@ -140,33 +133,34 @@ class _AddressDesignState extends State<AddressDesign> {
               style: ElevatedButton.styleFrom(
                 primary: Colors.black54,
               ),
-              onPressed: () {
-                // MapsUtils.openMapWithPosition(
-                //     widget.model!.lat!, widget.model!.lng!);
-                MapsUtils.openMapWithPosition(-3.823216, -38.481700);
+              onPressed: ()
+              {
+                // MapsUtils.openMapWithPosition(widget.model!.lat!, widget.model!.lng!);
 
-                // MapsUtils.openMapWithAddress(widget.model!.fullAddress!);
+                MapsUtils.openMapWithAddress(widget.model!.fullAddress!);
               },
               child: const Text("Check on Maps"),
             ),
 
             //button
-            widget.value == Provider.of<AddressChanger>(context).count
+            widget.value == Provider.of<AddressChanger>(context).count 
                 ? ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.green,
-                    ),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (c) => PlacedOrderScreen(
-                                    addressID: widget.addressID,
-                                    totalAmount: widget.totalAmount,
-                                    sellerUID: widget.sellerUID,
-                                  )));
-                    },
-                    child: const Text("Proceed"),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.green,
+                      ),
+                      onPressed: ()
+                      {
+                        Navigator.push(
+                            context, MaterialPageRoute(
+                            builder: (c)=> PlacedOrderScreen(
+                              addressID: widget.addressID,
+                              totalAmount: widget.totalAmount,
+                              sellerUID: widget.sellerUID,
+                            )
+                          )
+                        );
+                      },
+                      child: const Text("Proceed"),
                   )
                 : Container(),
           ],

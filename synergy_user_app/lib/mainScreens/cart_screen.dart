@@ -13,7 +13,9 @@ import 'package:synergy_user_app/widgets/progress_bar.dart';
 import 'package:synergy_user_app/widgets/text_widget_header.dart';
 import 'package:provider/provider.dart';
 
-class CartScreen extends StatefulWidget {
+
+class CartScreen extends StatefulWidget
+{
   final String? sellerUID;
 
   CartScreen({this.sellerUID});
@@ -22,7 +24,11 @@ class CartScreen extends StatefulWidget {
   _CartScreenState createState() => _CartScreenState();
 }
 
-class _CartScreenState extends State<CartScreen> {
+
+
+
+class _CartScreenState extends State<CartScreen>
+{
   List<int>? separateItemQuantityList;
   num totalAmount = 0;
 
@@ -43,19 +49,21 @@ class _CartScreenState extends State<CartScreen> {
         flexibleSpace: Container(
           decoration: const BoxDecoration(
               gradient: LinearGradient(
-            colors: [
-              Colors.cyan,
-              Colors.amber,
-            ],
-            begin: FractionalOffset(0.0, 0.0),
-            end: FractionalOffset(1.0, 0.0),
-            stops: [0.0, 1.0],
-            tileMode: TileMode.clamp,
-          )),
+                colors: [
+                  Colors.cyan,
+                  Colors.amber,
+                ],
+                begin:  FractionalOffset(0.0, 0.0),
+                end:  FractionalOffset(1.0, 0.0),
+                stops: [0.0, 1.0],
+                tileMode: TileMode.clamp,
+              )
+          ),
         ),
         leading: IconButton(
           icon: const Icon(Icons.clear_all),
-          onPressed: () {
+          onPressed: ()
+          {
             clearCartNow(context);
           },
         ),
@@ -69,11 +77,9 @@ class _CartScreenState extends State<CartScreen> {
           Stack(
             children: [
               IconButton(
-                icon: const Icon(
-                  Icons.shopping_cart,
-                  color: Colors.cyan,
-                ),
-                onPressed: () {
+                icon: const Icon(Icons.shopping_cart, color: Colors.cyan,),
+                onPressed: ()
+                {
                   print("clicked");
                 },
               ),
@@ -90,11 +96,11 @@ class _CartScreenState extends State<CartScreen> {
                       right: 4,
                       child: Center(
                         child: Consumer<CartItemCounter>(
-                          builder: (context, counter, c) {
+                          builder: (context, counter, c)
+                          {
                             return Text(
                               counter.count.toString(),
-                              style: const TextStyle(
-                                  color: Colors.white, fontSize: 12),
+                              style: const TextStyle(color: Colors.white, fontSize: 12),
                             );
                           },
                         ),
@@ -110,23 +116,19 @@ class _CartScreenState extends State<CartScreen> {
       floatingActionButton: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          const SizedBox(
-            width: 10,
-          ),
+          const SizedBox(width: 10,),
           Align(
             alignment: Alignment.bottomLeft,
             child: FloatingActionButton.extended(
-              label: const Text(
-                "Clear Cart",
-                style: TextStyle(fontSize: 16),
-              ),
+              heroTag: "btn1",
+              label: const Text("Clear Cart", style: TextStyle(fontSize: 16),),
               backgroundColor: Colors.cyan,
               icon: const Icon(Icons.clear_all),
-              onPressed: () {
+              onPressed: ()
+              {
                 clearCartNow(context);
 
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (c) => const MySplashScreen()));
+                Navigator.push(context, MaterialPageRoute(builder: (c)=> const MySplashScreen()));
 
                 Fluttertoast.showToast(msg: "Cart has been cleared.");
               },
@@ -135,21 +137,20 @@ class _CartScreenState extends State<CartScreen> {
           Align(
             alignment: Alignment.bottomLeft,
             child: FloatingActionButton.extended(
-              label: const Text(
-                "Check Out",
-                style: TextStyle(fontSize: 16),
-              ),
+              heroTag: "btn2",
+              label: const Text("Check Out", style: TextStyle(fontSize: 16),),
               backgroundColor: Colors.cyan,
               icon: const Icon(Icons.navigate_next),
-              onPressed: () {
+              onPressed: ()
+              {
                 Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (c) => AddressScreen(
-                      totalAmount: totalAmount.toDouble(),
-                      sellerUID: widget.sellerUID,
+                    context,
+                    MaterialPageRoute(
+                        builder: (c)=> AddressScreen(
+                          totalAmount: totalAmount.toDouble(),
+                          sellerUID: widget.sellerUID,
+                        ),
                     ),
-                  ),
                 );
               },
             ),
@@ -158,13 +159,16 @@ class _CartScreenState extends State<CartScreen> {
       ),
       body: CustomScrollView(
         slivers: [
+          
           //overall total amount
           SliverPersistentHeader(
-              pinned: true, delegate: TextWidgetHeader(title: "My Cart List")),
+              pinned: true,
+              delegate: TextWidgetHeader(title: "My Cart List")
+          ),
 
           SliverToBoxAdapter(
-            child: Consumer2<TotalAmount, CartItemCounter>(
-                builder: (context, amountProvider, cartProvider, c) {
+            child: Consumer2<TotalAmount, CartItemCounter>(builder: (context, amountProvider, cartProvider, c)
+            {
               return Padding(
                 padding: const EdgeInsets.all(8),
                 child: Center(
@@ -172,17 +176,17 @@ class _CartScreenState extends State<CartScreen> {
                       ? Container()
                       : Text(
                           "Total Price: " + amountProvider.tAmount.toString(),
-                          style: const TextStyle(
-                            color: Colors.black,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w500,
-                          ),
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 18,
+                              fontWeight:  FontWeight.w500,
+                            ),
                         ),
                 ),
               );
             }),
           ),
-
+          
           //display cart items with quantity number
           StreamBuilder<QuerySnapshot>(
             stream: FirebaseFirestore.instance
@@ -190,56 +194,47 @@ class _CartScreenState extends State<CartScreen> {
                 .where("itemID", whereIn: separateItemIDs())
                 .orderBy("publishedDate", descending: true)
                 .snapshots(),
-            builder: (context, snapshot) {
+            builder: (context, snapshot)
+            {
               return !snapshot.hasData
-                  ? SliverToBoxAdapter(
-                      child: Center(
-                        child: circularProgress(),
-                      ),
-                    )
-                  : snapshot.data!.docs.isEmpty
-                      ? //startBuildingCart()
-                      Container()
-                      : SliverList(
-                          delegate: SliverChildBuilderDelegate(
-                            (context, index) {
-                              Items model = Items.fromJson(
-                                snapshot.data!.docs[index].data()!
-                                    as Map<String, dynamic>,
-                              );
+                  ? SliverToBoxAdapter(child: Center(child: circularProgress(),),)
+                  : snapshot.data!.docs.length == 0
+                  ? //startBuildingCart()
+                     Container()
+                  : SliverList(
+                    delegate: SliverChildBuilderDelegate((context, index)
+                    {
+                      Items model = Items.fromJson(
+                        snapshot.data!.docs[index].data()! as Map<String, dynamic>,
+                      );
 
-                              if (index == 0) {
-                                totalAmount = 0;
-                                totalAmount = totalAmount +
-                                    (model.price! *
-                                        separateItemQuantityList![index]);
-                              } else {
-                                totalAmount = totalAmount +
-                                    (model.price! *
-                                        separateItemQuantityList![index]);
-                              }
+                      if(index == 0)
+                      {
+                        totalAmount = 0;
+                        totalAmount = totalAmount + (model.price! * separateItemQuantityList![index]);
+                      }
+                      else
+                      {
+                        totalAmount = totalAmount + (model.price! * separateItemQuantityList![index]);
+                      }
 
-                              if (snapshot.data!.docs.length - 1 == index) {
-                                WidgetsBinding.instance
-                                    .addPostFrameCallback((timeStamp) {
-                                  Provider.of<TotalAmount>(context,
-                                          listen: false)
-                                      .displayTotalAmount(
-                                          totalAmount.toDouble());
-                                });
-                              }
+                      if(snapshot.data!.docs.length - 1 == index)
+                      {
+                        WidgetsBinding.instance.addPostFrameCallback((timeStamp)
+                        {
+                          Provider.of<TotalAmount>(context, listen: false).displayTotalAmount(totalAmount.toDouble());
+                        });
+                      }
 
-                              return CartItemDesign(
-                                model: model,
-                                context: context,
-                                quanNumber: separateItemQuantityList![index],
-                              );
-                            },
-                            childCount: snapshot.hasData
-                                ? snapshot.data!.docs.length
-                                : 0,
-                          ),
-                        );
+                      return CartItemDesign(
+                        model: model,
+                        context: context,
+                        quanNumber: separateItemQuantityList![index],
+                      );
+                    },
+                    childCount: snapshot.hasData ? snapshot.data!.docs.length : 0,
+                  ),
+                 );
             },
           ),
         ],
