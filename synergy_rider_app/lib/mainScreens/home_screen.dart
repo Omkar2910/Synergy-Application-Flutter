@@ -1,6 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:synergy_rider_app/assistantMethods/get_current_location.dart';
 import 'package:synergy_rider_app/authentication/auth_screen.dart';
 import 'package:synergy_rider_app/global/global.dart';
+import 'package:synergy_rider_app/mainScreens/earnings_screen.dart';
+import 'package:synergy_rider_app/mainScreens/history_screen.dart';
+import 'package:synergy_rider_app/mainScreens/new_orders_screen.dart';
+import 'package:synergy_rider_app/mainScreens/not_yet_delivered_screen.dart';
+import 'package:synergy_rider_app/mainScreens/parcel_in_progress_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -47,22 +54,27 @@ class _HomeScreenState extends State<HomeScreen> {
                 {
                   if(index==0)
                   {
+                     Navigator.pushReplacement(context, MaterialPageRoute(builder: (c)=> NewOrdersScreen()));
                     // New Orders
                   }
                   if(index==1)
                   {
+                    Navigator.push(context, MaterialPageRoute(builder: (c)=> ParcelInProgressScreen()));
                     // Parcels in progress
                   }
                   if(index==2)
                   {
+                    Navigator.push(context, MaterialPageRoute(builder: (c)=> NotYetDeliveredScreen()));
                     // Not yet delivered
                   }
                   if(index==3)
                   {
+                    Navigator.push(context, MaterialPageRoute(builder: (c)=> HistoryScreen()));
                     // History
                   }
                   if(index==4)
                   {
+                    Navigator.push(context, MaterialPageRoute(builder: (c)=> EarningsScreen()));
                     // Total Earnings
                   }
                   if(index==5)
@@ -109,6 +121,38 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+
+  @override
+  void initState() {
+    super.initState();
+
+    UserLocation uLocation = UserLocation();
+    uLocation.getCurrentLocation();
+    getPerParcelDeliveryAmount();
+    getRiderPreviousEarnings();
+  }
+
+   getRiderPreviousEarnings()
+  {
+    FirebaseFirestore.instance
+        .collection("riders")
+        .doc(sharedPreferences!.getString("uid"))
+        .get().then((snap)
+    {
+      previousRiderEarnings = snap.data()!["earnings"].toString();
+    });
+  }
+
+  getPerParcelDeliveryAmount()
+  {
+    FirebaseFirestore.instance
+        .collection("perDelivery")
+        .doc("addamount")
+        .get().then((snap)
+    {
+       perParcelDeliveryAmount = snap.data()!["amount"].toString();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

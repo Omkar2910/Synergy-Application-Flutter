@@ -43,6 +43,7 @@ dependencies:
   geolocator: ^8.2.1
   image_picker: ^0.8.5+3
   shared_preferences: ^2.0.15
+  url_launcher: ^6.0.18
 
 dev_dependencies:
   flutter_test:
